@@ -1,30 +1,31 @@
 
 import { Header } from "./components/Header";
 import {
-  BrowserRouter as Router,
-  Switch,
+  BrowserRouter,
+  Routes,
   Route,
 } from "react-router-dom";
 import { Home } from "./views/Home";
 import { About } from "./views/About";
+import { MovieDetail } from "./views/MovieDetail";
 
 
 function App() {
  
   return (
     <div className="App">
-      <Router>
+      <BrowserRouter>
       <Header/>
       
-      <Switch>
-          <Route path="/about">
-            <About />
-          </Route>
-          <Route path="/">
-            <Home/>
-          </Route>
-        </Switch>
-      </Router>
+      <Routes>
+          <Route path="/about" element={<About />} />
+          
+          <Route path="/movie/:id" element={<MovieDetail />} />
+            
+          <Route path="/" element={<Home />} />
+
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
