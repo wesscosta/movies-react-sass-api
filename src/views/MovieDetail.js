@@ -5,25 +5,28 @@ import { MoviesService } from "../api/MoviesService";
 
 export const MovieDetail = () => {
     const {id} = useParams();
+    const [movie, setMovie] = useState({});
 
-    const [movie, setMovie] = useState([]);
-
-    const fetchMovie = async() => {
-        const { data } = await MoviesService.getMoviesById(id);
-        setMovie(data.results);
-        console.log(data);
+    
+    const fetchMovie = async () => {
+        const { data } = await MoviesService.getMovieById(id);
+        setMovie(data);
+        // console.log(data);
     };
   
     useEffect(() => {
         fetchMovie();
     }, []);
 
-    return(
-        <>
-            <h1>{movie.title}</h1>
+    const urlImg = `https://www.themoviedb.org/t/p/w220_and_h330_face${movie.poster_path}`
 
+    return (
+        <>
             <article>
-                {movie.overview}
+                <h1>{movie.title}</h1>
+                <img src= {urlImg} />
+                <p>Popularidade: {movie.popularity}</p>
+                <p>Descrição:{movie.overview}</p>
             </article>
         </>
     )
